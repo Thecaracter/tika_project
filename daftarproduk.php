@@ -262,8 +262,10 @@ include 'koneksi.php';
                                     text: response.message,
                                     icon: 'success'
                                 }).then(() => {
-                                    // Reload the page or update the table as needed
-                                    location.reload();
+                                    // Reload the page after a short delay
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 1000); // 1000 milliseconds = 1 second
                                 });
                             } else {
                                 Swal.fire({
@@ -287,8 +289,6 @@ include 'koneksi.php';
             });
         }
     </script>
-
-
     <style>
         .button-spacing {
             margin-right: 10px;
