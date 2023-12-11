@@ -1,0 +1,1112 @@
+/*CSS UNTUK CLASS NAVIGATOR PADA CLASS INDEX DAN ABOUT*/
+
+/*BODY*/
+*{
+	margin:0;
+	padding:0;
+	font-family: time new roman;
+}
+.navigasi{
+	background-color: #DFF5F6;
+	background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+	width:100%;
+	height: 100px;
+	
+}
+/*LOGO*/
+.logo{
+	float: left;
+}
+/*MENU*/
+.menu{
+	margin-left: 1000x;
+	padding-top: 35px;
+	cursor: pointer;
+
+}
+.menu ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.menu ul li a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    position: relative; 
+}
+.menu ul li a::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0;
+    background: #EF2894;
+    transition: width 0.3s; 
+}
+.menu ul li a:hover::after {
+    width: 100%;
+}
+.menu ul li::after {
+    content: '';
+    height: 3px;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+.menu ul li a:hover {
+    width: 100%;
+    color: #EF2894;
+    font-style: italic;
+}
+
+/* SUBMENU UNTUK SERVICE DAN SHOP */
+.submenu-content {
+    display: none;
+    position: absolute;
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    box-shadow: 0 75px 85px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+}
+.submenu:hover .submenu-content {
+    display: block;
+}
+
+
+/* SEARCH BOX */
+.search-box {
+    margin-left: 20px;
+}
+.search-box form {
+    display: flex;
+    align-items: center;
+}
+.search-box input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+.search-box button {
+    background-color: #EF2894;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+
+/* SUBMENU UNTUK FORM SIGN UP*/
+.submenudua-content {
+    display: none; /*Untuk menyembunyikan menu*/
+    position: absolute;
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    box-shadow: 0 95px 85px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    width: 210px; /*MENGATUR LEBAR FORM*/
+    height: 350px; /*MENGATUR TINGGI FORM*/
+    padding: 35px; /*spasi atau ruang diantara konten dan border. */
+}
+.submenuakun:hover .submenudua-content {
+    display: block; /*ANIMASI KE MENU YNG INGIN DI KLIK*/
+}
+.submenudua-content label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+.submenudua-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.submenudua-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ADDEF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submenudua-content button:hover {
+    background-color: #1CBAC8;
+}
+
+/*KUCING GAMBAR PADA INDEX*/
+.kucing {
+	background-color: #DFF5F6;
+	height: 750px;
+	text-align: center;
+}
+.kucing h1{
+    position: absolute;
+    top: 30%;
+    left: 4%;
+    font-size: 55px;
+    color: #000000;
+}
+.kucing h1 span{
+    color: #FF66C4;
+}
+.kucing p{
+    width: 650px;
+    position: absolute;
+    top: 50%;
+    left: 4%;
+    line-height: 26px;
+    text-align: justify;
+}
+
+/*KUCING GAMBAR PADA ABOUT*/
+.kucingone {
+	background-color: #DFF5F6;
+	height: 750px;
+	text-align: center;
+}
+.kucingone h1{
+    position: absolute;
+    top: 30%;
+    left: 4%;
+    font-size: 55px;
+    color: #000000;
+}
+.kucingone h1 span{
+    color: #FF66C4;
+}
+.kucingone p{
+    width: 650px;
+    position: absolute;
+    top: 50%;
+    left: 4%;
+    line-height: 26px;
+    text-align: justify;
+}
+
+/* TOMBOL BACA*/
+.baca h1 {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+  margin: 1px;
+}
+.baca .button {
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  display: inline-block;
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 1px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.baca .button:hover {
+ background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+  transform: scale(1.05);
+}
+
+/* PENGATURAN GAMBAR KUCING PADA INDEX DAN ABOUT*/
+.background_image img{
+    width: 650px;
+    position: absolute;
+    top: 25%;
+    left: 47%;
+    margin-left: 25px;
+}
+
+/* PENGATURAN TOMBOL BACA SELANGKAPNYA ATAU BELI SEKARANG*/
+.btn{
+    position: absolute;
+    top: 77%;
+    left: 38px;
+    width: 340px;
+    display: flex;
+	/* kenapa pake flex? karena parentnya pada div menu jadi contentnya akan menyesuaikan parent menjadi datar*/
+    align-items: center;
+    justify-content: space-around;
+}
+.btn .read{
+    background: #7CEEF4;
+    color: Black;
+	font-family: Time New Roman bold;
+    cursor: pointer;
+}
+.btn p{
+    padding: 10px 25px;
+    background: none;
+    border: 2px solid #b36982;
+    cursor: pointer;
+}
+
+/*ABOUT KUCING CATEGORY*/
+.about{
+	width: 100%;
+    background-color: #DFF5F6;
+	background-size:cover;
+	min-height: 100px;
+}
+.about .box{
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.about .box .cards{
+    width: 330px;
+    height: auto;
+    padding: 5px 10px;
+    margin: 2px;
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    border: 1px solid gainsboro;
+    cursor: pointer;
+    z-index: 1;
+    transition: 0.3s;
+}
+.about .box .cards:hover{
+    box-shadow: 3px 5px 20px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+    border-radius: 4px;
+}
+
+/*ABOUT KUCING */
+.aboutone{
+	width: 100%;
+    background-color: #DFF5F6;
+	background-size:cover;
+	min-height: 100px;
+}
+.aboutone .box{
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.aboutone .box .cards{
+    width: 330px;
+    height: auto;
+    padding: 5px 10px;
+    margin: 2px;
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    border: 1px solid gainsboro;
+    cursor: pointer;
+    z-index: 1;
+    transition: 0.3s;
+}
+.aboutone .box .cards:hover{
+    box-shadow: 3px 5px 20px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+    border-radius: 4px;
+}
+
+/* ABOUT CAT UNTUK SERVICE*/
+.about hr{
+    height: 4px;
+    background: #d98ca5;
+    border-radius: 5px;
+    margin: 20px 20px;
+}
+.about .miaw h1{
+    font-size: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 35px 0;
+}
+.about .miaw p{
+    text-align: center;
+    margin: 35px 0;
+    color: white;
+    font-size: 25px;
+}
+.about .miaw_box{
+    width: 100%;
+    display: grid;
+	/* Elemen akan ditampilkan sebagai wadah grid*/
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr 0fr;
+    grid-gap: 2px;/*Menetapkan jarak 2 piksel antara item kisi (baris dan kolom)*/
+}
+.about .miaw box .miaw_card{
+    background: #9d9d9d;
+    width: 250px;
+    padding: 10px 10px;
+    text-align: center;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.about .miaw_box .miaw_card:hover{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+}
+.about .miaw .miaw_box img{
+    width: 250px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.about .miaw .miaw_box img:hover{
+    transform: scale(1.1);
+}
+.about .miaw_box .miaw_card h1{
+    font-size: 35px;
+    color: gainsboro;
+    margin: 15px 0;
+}
+.about .miaw_box .miaw_card p{
+    color: white;
+    margin: 3px 0;
+    font-size: 17px;
+}
+
+/*PENGATURAN GAMBAR KUCING DLM KOTAK SERVICE*/
+.about .miaw p{
+    text-align: center;
+    margin: 30px 0;
+    color: gray;
+    font-size: 25px;
+	
+}
+.about .miaw_box{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr 0fr;
+    grid-gap: 30px;
+}
+.about .miaw_box .miaw_card{
+    background: #5AA3F8;
+    width: 310px;
+	margin: 58px;
+    padding: 30px 30px;
+    text-align: center;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.about .miaw_box .miaw_card:hover{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+}
+.about .miaw.miaw_box img{
+    width: 80px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.about .miaw .miaw_box img:hover{
+    transform: scale(1.1);
+}
+.about .miaw_box .miaw_card h1{
+    font-size: 25px;
+    color: white;
+    margin: 15px 0;
+}
+.about .miaw_box .miaw_card p{
+    color: white;
+    margin: 10px 0;
+    font-size: 17px;
+}
+
+
+/*contact*/
+.contact{
+	width: 100%;
+    background-color: #DFF5F6;
+	
+}
+.contact hr{
+    height: 4px;
+    background: #d98ca5;
+    border-radius: 5px;
+    margin: 20px 20px;
+}
+.contact .box{
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contact .box .card{
+    width: 330px;
+    height: auto;
+    padding: 5px 10px;
+    margin: 2px;
+    background: #71E0F8;
+    border: 1px solid abuabu;
+    cursor: pointer;
+    z-index: 1;
+    transition: 0.3s;
+}
+.contact .box .card:hover{
+    box-shadow: 3px 5px 20px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+    border-radius: 4px;
+}
+
+/* CATATAN KAKI PADA INDEX DAN ABOUT*/
+footer {
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    color: Black;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+
+/* CSS UNTUK FITUR MIAW SHOP*/
+
+
+/*---CLAS NAVIGATOR-----*/
+
+/*BODY*/
+*{
+	margin:0;
+	padding:0;
+	font-family: time new roman;
+}
+.navigasi{
+	background-color: #DFF5F6;
+	background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+	width:100%;
+	height: 100px;
+	
+}
+/*LOGO*/
+.logo{
+	float: left;
+}
+/*MENU*/
+.menu{
+	margin-left: 1000x;
+	padding-top: 35px;
+	cursor: pointer;
+
+}
+.menu ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.menu ul li a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    position: relative; 
+}
+.menu ul li a::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0;
+    background: #EF2894;
+    transition: width 0.3s; 
+}
+.menu ul li a:hover::after {
+    width: 100%;
+}
+.menu ul li::after {
+    content: '';
+    height: 3px;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+.menu ul li a:hover {
+    width: 100%;
+    color: #EF2894;
+    font-style: italic;
+}
+/* SUBMENU UNTUK SERVICE DAN SHOP */
+.submenu-content {
+    display: none;
+    position: absolute;
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    box-shadow: 0 75px 85px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+}
+.submenu:hover .submenu-content {
+    display: block;
+}
+/* SEARCH BOX */
+.search-box {
+    margin-left: 20px;
+}
+.search-box form {
+    display: flex;
+    align-items: center;
+}
+.search-box input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+.search-box button {
+    background-color: #EF2894;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+/* SUBMENU UNTUK FORM SIGN UP*/
+.submenudua-content {
+    display: none; /*Untuk menyembunyikan menu*/
+    position: absolute;
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    box-shadow: 0 95px 85px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    width: 210px; /*MENGATUR LEBAR FORM*/
+    height: 350px; /*MENGATUR TINGGI FORM*/
+    padding: 35px; /*spasi atau ruang diantara konten dan border. */
+}
+.submenuakun:hover .submenudua-content {
+    display: block; /*ANIMASI KE MENU YNG INGIN DI KLIK*/
+}
+.submenudua-content label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+.submenudua-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.submenudua-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ADDEF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submenudua-content button:hover {
+    background-color: #1CBAC8;
+}
+
+
+
+/*-----CLASS ISI PADA FITUR MENU GAMBAR KERANJANG SAMPING----*/
+
+/*Pengturan logo,img dan icon*/
+.logoone {
+  text-align: center;
+  padding: 35px;
+  background-color:white ; 
+  margin-bottom: 10px;
+}
+.img {
+  border-radius: 90%; 
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); 
+}
+.icon {
+    Position : Fixed;
+	cursor: pointer; 
+}
+/*Pengaturan meni (menu item)*/
+.meni {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: 100%; /* Position the menu below the icon */
+    left: 0;
+    background-color: #fff; /* Background color for the menu */
+    border: 1px solid #ccc; /* Border for the menu */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift effect */
+}
+.meni li {
+    padding: 10px;
+}
+.meni li a {
+    text-decoration: none;
+    color: #333; /* Link color */
+}
+.meni li:hover {
+    background-color: #f0f0f0; /* Background color on hover */
+}
+/*Pengaturan gambar */
+.hallo1 {
+    background-color: white;
+    height: 950px;
+    text-align: center;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hallo1 .background_image img {
+    width: 1000px;
+	height: 650px;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 35px;
+}
+/* CATATAN KAKI PADA INDEX & ABOUT, SHOP*/
+footer {
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    color: Black;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+
+
+/*CSS FITUR MAKANAN,MAINAN,KEBERSIHAN DAN OBAT KUCING*/
+
+/*Pengturan logo,img dan icon*/
+.logoone {
+  text-align: center;
+  padding: 35px;
+  background-color:white ; 
+  margin-bottom: 10px;
+}
+.img {
+  border-radius: 90%; 
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); 
+}
+.icon {
+    Position : Fixed;
+	cursor: pointer; 
+}
+/*Pengaturan meni (menu item)*/
+.meni {
+	
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: 100%; /* Position the menu below the icon */
+    left: 0;
+    background-color: #fff; /* Background color for the menu */
+    border: 1px solid #ccc; /* Border for the menu */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* BAYANGAN */
+}
+.meni li {
+    padding: 10px;
+}
+.meni li a {
+    text-decoration: none;
+    color: #333; /* Link color */
+}
+.meni li:hover {
+    background-color: #f0f0f0; /* Background color on hover */
+}
+
+
+/*PENGATURAN CLASS BELI" */
+.gambar {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.foto {
+    text-align: center;
+    margin: 49px;
+    left: 45px;
+	position :relative;
+}
+.foto img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.foto h2 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+.foto p {
+    font-size: 16px;
+    color: #888;
+}
+.foto a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.foto a:hover {
+    background-color: #45a049;
+}
+/*COVER PADA food*/
+.background_imagetree {
+    background-image: url('images/order.png');
+    background-size: cover; /* Menyesuaikan gambar agar selalu menutupi seluruh elemen */
+    background-position: center; /* Posisi gambar di tengah elemen */
+    height: 900px; /* Sesuaikan tinggi sesuai kebutuhan */
+    width: 100%; /* Lebar 100% untuk menutupi lebar elemen */
+    border-radius: 8px; /* Opsi: tambahkan sudut melengkung jika diinginkan */
+    overflow: hidden; /* Memastikan gambar yang lebih besar dari elemen tetap di dalamnya */
+}
+
+
+
+
+/* REGISTER */
+
+.background_imagetwo {
+    display: flex;
+    justify-content: flex-start; /* Align content to the start (left) of the container */
+    align-items: center; /* Center vertically within the container */
+    height: 100vh; /* Set the height of the container to 100% of the viewport height */
+    
+}
+.background_imagetwo img {
+    max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
+    height: auto; /* Maintain the aspect ratio of the image */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+.kotakregis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.register {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.register h1 {
+    text-align: center;
+    color: #333;
+}
+.form-group {
+    margin-top: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #2ADDEF;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-primary:hover {
+    background: #1da1f2;
+}
+/* CATATAN KAKI PADA INDEX & ABOUT, SHOP*/
+footer {
+    background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    color: Black;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+
+/*CSS SERVIS HOTEL*/
+
+/*DESKRIPSI*/
+.description {
+    text-align: center;
+    margin: 75px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.description h2 {
+    color: #333;
+}
+.description h1 {
+    color: #ff6600;
+}
+.description span {
+    font-weight: bold;
+}
+.description p {
+    color: #555;
+    line-height: 1.6;
+}
+/*COVER PADA MIAW HOTEL*/
+.background_imageone {
+    background-image: url('images/hotel3.png');
+    background-size: cover; /* Menyesuaikan gambar agar selalu menutupi seluruh elemen */
+    background-position: center; /* Posisi gambar di tengah elemen */
+    height: 900px; /* Sesuaikan tinggi sesuai kebutuhan */
+    width: 100%; /* Lebar 100% untuk menutupi lebar elemen */
+    border-radius: 8px; /* Opsi: tambahkan sudut melengkung jika diinginkan */
+    overflow: hidden; /* Memastikan gambar yang lebih besar dari elemen tetap di dalamnya */
+}
+/*CSS TOMBOL BOKING PADA MIAW HOTEL,CARE, DAN PLAYGROUD*/
+.boking h1 {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0;
+}
+.boking .button {
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  display: inline-block;
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.boking .button:hover {
+	background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+	transform: scale(1.05);
+}
+
+
+/*CSS MIAWCARE AND PLAYGROUND*/
+
+
+/*logo 1 untuk menu miawcare*/
+.logotwo {
+  text-align: center;
+  padding: 35px;
+  background-color:white ; 
+  margin-bottom: 10px;
+}
+.img {
+  border-radius: 90%; 
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); 
+}
+h2 {
+  font-family: 'Arial', time new roman; 
+  color: #333; 
+  margin-top: 20px; 
+}
+h2 span {
+  color: #e44d26; 
+}
+h1 {
+  font-family: 'Arial', time new roman;
+  color: #333; 
+  margin-top: 20px; 
+}
+h1 span {
+  color: #418BED; 
+}
+/*container menu miaw care*/
+    .container {
+      display: flex;
+      align-items: center;
+    }
+    .mandi img {/*mengatur icon */
+      width: 89px;
+      height: 89px;
+    }
+    .card-title {
+      font-size: 22px; 
+      margin-left: 29px;
+    }
+	
+/* .hallo class Gambar Pada miaw care dan miaw playground*/
+.hallo2 {
+    background-color: white;
+    height: 950px;
+    text-align: center;
+}
+.hallo2 .background_image img {
+    width: 1225px;
+	height: 650px;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 25px;
+}
+
+/*table pada miaw care dan playground*/
+
+.daftar table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.daftar th {
+    background-color: #f2f2f2;
+}
+.daftar tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.daftar td, .daftar th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+.daftar h1 {
+    text-align: center;
+    padding: 10px;
+   background-image: linear-gradient(90deg, #DFF5F6 30%,#2ADDEF);
+    color: black;
+}
+
+
+
+/*LOGIN*/
+
+.background_imagetwo {
+    display: flex;
+    justify-content: flex-start; /* Align content to the start (left) of the container */
+    align-items: center; /* Center vertically within the container */
+    height: 100vh; /* Set the height of the container to 100% of the viewport height */
+    
+}
+.background_imagetwo img {
+    max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
+    height: auto; /* Maintain the aspect ratio of the image */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+.kotaklogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.login h1 {
+    text-align: center;
+    color: #333;
+}
+.login form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+}
+.login input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #2ADDEF;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 8px; /* Add margin between buttons */
+}
+.btn-primary:last-child {
+    margin-bottom: 0; /* Remove margin for the last button */
+}
+.btn-primary:hover {
+    background: #1da1f2;
+}
+
+
+/*CSS PEMESANAN PRODUK*/
+.pemesanan-produk {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+.form-group button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: #2980b9;
+}
+table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
