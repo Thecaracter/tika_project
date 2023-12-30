@@ -10,6 +10,8 @@ include 'koneksi.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="images/kucing.png" type="image/png" rel="shortcut icon" />
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-heBDorEHM2augMRz"></script>
     <title> HAY MIAW CARE SHOP.com </title>
 </head>
 
@@ -154,9 +156,20 @@ include 'koneksi.php';
                             echo '<td>' . $row['customerid'] . '</td>';
                             echo '<td>' . $row['alamat'] . '</td>';
                             echo '<td>' . $row['total_bayar'] . '</td>';
-                            echo '<td>';
-                            echo '<button class="delete-btn" onclick="deleteProduct(\'' . $row['order_id'] . '\')" style="background-color: #dc3545; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Batalkan Pesanan</button>';
-                            echo '</td>';
+                            $status = $row['status'];
+
+
+                            if ($status == 1) {
+                                echo '<td>';
+                                echo '<button class="payment-btn" onclick="paymentAction(\'' . $row['order_id'] . '\')" style="background-color: #28a745; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Lakukan Pembayaran</button>';
+                                echo '</td>';
+                            } elseif ($status == 2) {
+                                echo '<td>';
+                                echo '<button class="delete-btn" onclick="deleteProduct(\'' . $row['order_id'] . '\')" style="background-color: #dc3545; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Batalkan Pesanan</button>';
+                                echo '</td>';
+                            } else {
+                                echo '<td>Status Tidak Dikenali</td>';
+                            }
                             echo '</tr>';
                         }
                         // Close the tbody tag
@@ -229,8 +242,66 @@ include 'koneksi.php';
             /* Adjust the margin as needed */
         }
     </style>
+    <!-- Pastikan Anda sudah menyertakan jQuery di halaman Anda -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Skrip JavaScript -->
+    <script>
+        function paymentAction(orderId) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        // Handle the response if needed
+                        console.log(xhr.responseText);
+
+                        // Parse JSON response if it's a JSON string
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+
+                            // Access specific properties of the response
+                            console.log("Snap Token: " + response.snapToken);
+
+                            // Perform additional actions based on the response
+                            // For example, you can pass the transaction token to Midtrans Snap
+                            window.snap.pay(response.snapToken, {
+                                onSuccess: function (result) {
 
 
+                                    window.location.href = 'controller/updatestatus_controller.php?order_id=' + encodeURIComponent(orderId);
+                                },
+                                onPending: function (result) {
+                                    // Handle pending status if needed
+                                    console.log("Payment is pending:", result);
+                                },
+                                onError: function (result) {
+                                    // Handle error status if needed
+                                    console.error("Payment failed:", result);
+                                },
+                                onClose: function () {
+                                    // Handle when the Snap Popup is closed
+                                    console.log("Snap Popup closed");
+                                }
+                            });
+                        } catch (error) {
+                            console.error("Error parsing JSON response:", error);
+                        }
+                    } else {
+                        console.error("XHR request failed with status:", xhr.status);
+                    }
+                }
+            };
+
+            var url = 'controller/payment_controller.php';
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            var data = 'order_id=' + orderId;
+
+
+            xhr.send(data);
+        }
+    </script>
 </body>
 
 </html>

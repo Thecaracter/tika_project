@@ -15,10 +15,13 @@ $totalPembayaran = $_POST['totalPembayaran'];
 $produkIDs = $_POST['produkIDs'];
 $jumlahs = $_POST['jumlahs'];
 $customerID = $_SESSION['user_data']['customerid'];
+$status = 1;
 
 // Siapkan statement SQL untuk tabel 'order'
-$sqlOrder = $conn->prepare("INSERT INTO `order` (order_id, orderdate, customerid, alamat, total_bayar) VALUES (?, NOW(), ?, ?, ?)");
-$sqlOrder->bind_param("siss", $orderID, $customerID, $alamatPengiriman, $totalPembayaran);
+$sqlOrder = $conn->prepare("INSERT INTO `order` (order_id, orderdate, customerid, alamat, total_bayar, status) VALUES (?, NOW(), ?, ?, ?, ?)");
+$sqlOrder->bind_param("sssdi", $orderID, $customerID, $alamatPengiriman, $totalPembayaran, $status);
+
+
 
 // Eksekusi prepared statement untuk tabel 'order'
 if ($sqlOrder->execute()) {
@@ -41,9 +44,8 @@ if ($sqlOrder->execute()) {
     echo "Pesanan berhasil disimpan!";
 } else {
     // Jika ada kesalahan dalam menyimpan ke 'order'
-    echo "Error: " . $sqlOrder->error;
+    echo "Error: Gagal menyimpan pesanan. " . $sqlOrder->error;
 }
 
-// Tutup koneksi
-$conn->close();
+
 ?>

@@ -211,7 +211,7 @@ session_start();
                     });
                 });
             </script>
-
+            <br><br>
             <label for="harga">Harga Produk:</label>
             <input type="text" id="harga" name="harga" readonly required>
 
@@ -337,7 +337,7 @@ session_start();
                         // Tampilkan pesan ke pengguna atau lakukan tindakan lain sesuai kebutuhan
 
                         alert(response);
-                        location.reload();
+                        location.href = "transaksi.php";
                     },
                     error: function (xhr, status, error) {
                         // Tangani kesalahan jika terjadi
