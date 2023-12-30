@@ -43,6 +43,7 @@ include 'koneksi.php';
                                 echo '<li><a href="transaksi.php">Barang Anda</a></li>';
                             } elseif ($_SESSION['role'] == 1) {
                                 echo '<li><a href="daftarproduk.php">Tambah Produk</a></li>';
+                                echo '<li><a href="user_admin.php">User</a></li>';
                             }
                         } else {
                             // Handle the case when the 'user_data' or 'role' is not set (optional)
@@ -259,10 +260,11 @@ include 'koneksi.php';
                 });
             </script>
 
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
             <script>
+
                 function deleteProduct(productId) {
                     // Show a SweetAlert confirmation dialog
                     Swal.fire({

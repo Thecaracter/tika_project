@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="images/kucing.png" type="image/png" rel="shortcut icon" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title> HAY MIAW CARE SHOP.com </title>
 </head>
 
@@ -115,81 +116,126 @@ session_start();
             </ul>
         </div>
 
-        <div class="icon">
-            <img src="images/keranjang.png" alt="icon">
-            <ul class="meni">
-                <li><a href="food.php">CAT FOOD</a></li>
-                <li><a href="toys.html">CAT TOYS</a></li>
-                <li><a href="cleaning.html">CLEANING TOOL</a></li>
-                <li><a href="madis.html">CAT MEDICINE</a></li>
-            </ul>
-        </div>
         <div class="logoone">
             <img src="images/miaw3.png" width="310" height="300" loading="lazy" alt="" class="img">
         </div>
 
-        <!-- beli beli -->
-        <div class='gambar'>
+        <div class="pemesanan-produk">
 
-            <div class='foto'>
-                <img src='images/wks3.png'>
-                <h2>Friskes Adult 500 gram</h2>
-                <p>Rp 50.000.000,00</p> <br>
-            </div>
 
-            <div class='foto'>
-                <img src='images/wks2.png'>
-                <h2>Friskes Adult mix 500 gram</h2>
-                <p>Rp 25.000,00</p> <br>
-            </div>
-            <div class='foto'>
-                <img src='images/wks2.png'>
-                <h2>Baju Panda</h2>
-                <p>Rp.25.000,00</p> <br>
-            </div>
-            <div class='foto'>
-                <img src='images/wks2.png'>
-                <h2>Baju Panda</h2>
-                <p>Rp.25.000,00</p> <br>
-            </div>
-            <div class='foto'>
-                <img src='images/wks2.png'>
-                <h2>Baju Panda</h2>
-                <p>Rp.25.000,00</p> <br>
-            </div>
-            <div class='foto'>
-                <img src='images/wks2.png'>
-                <h2>Baju Panda</h2>
-                <p>Rp.25.000,00</p> <br>
-            </div>
-            <div class='foto'>
-                <img src='images/wks2.png'>
-                <h2>Baju Panda</h2>
-                <p>Rp.25.000,00</p> <br>
-            </div>
+            <!-- Table to display orders -->
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>No Telpon</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <?php
+                include 'koneksi.php';
+                $query = "SELECT * FROM customer WHERE role = 2 ";
 
-            <div class="background_imagetree">
-                <div class="boking">
-                    <h1>Buy Now</h1>
-                    <a href="cart.php">
-                        <div class="button">
-                            <p>BUY NOW !!</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const icon = document.querySelector(".icon");
-                    const menu = document.querySelector(".meni");
+                $result = mysqli_query($conn, $query);
 
-                    // Toggle menu visibility when the icon is clicked
-                    icon.addEventListener("click", function () {
-                        menu.style.display = menu.style.display === "none" ? "block" : "none";
+                ?>
+                <?php
+                if ($result) {
+                    // Open the tbody tag
+                    echo '<tbody>';
+
+                    // Fetch associative array
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<tr>';
+                        echo '<td>' . $row['customerid'] . '</td>';
+                        echo '<td>' . $row['name'] . '</td>';
+                        echo '<td>' . $row['username'] . '</td>';
+                        echo '<td>' . $row['email'] . '</td>';
+                        echo '<td>' . $row['phone_number'] . '</td>';
+                        echo '<td>';
+                        echo '<button class="delete-btn" onclick="deleteCustomer(' . $row['customerid'] . ')" style="background-color: #dc3545; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Delete</button>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+
+                    // Close the tbody tag
+                    echo '</tbody>';
+
+                    // Free result set
+                    mysqli_free_result($result);
+                } else {
+                    // Handle the error if the query fails
+                    echo "Error: " . mysqli_error($conn);
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+    <script src="JS/cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function deleteCustomer(customerId) {
+            // Use SweetAlert for confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this customer data!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the deletion action using AJAX
+                    $.ajax({
+                        type: 'POST',
+                        url: 'controller/deleteuser_controller.php', // Replace with the actual file name
+                        data: { customerId: customerId },
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                Swal.fire({
+                                    title: 'Deleted!',
+                                    text: 'Customer has been deleted.',
+                                    icon: 'success',
+                                }).then(() => {
+                                    // Reload the page or update the table as needed
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Failed to delete customer. ' + response.message,
+                                    icon: 'error',
+                                });
+                            }
+                        },
+                        error: function () {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An unexpected error occurred.',
+                                icon: 'error',
+                            });
+                        }
                     });
-                });
-            </script>
+                }
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const icon = document.querySelector(".icon");
+            const menu = document.querySelector(".meni");
 
+            // Toggle menu visibility when the icon is clicked
+            icon.addEventListener("click", function () {
+                menu.style.display = menu.style.display === "none" ? "block" : "none";
+            });
+        });
+
+    </script>
 </body>
 
 </html>

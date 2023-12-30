@@ -31,6 +31,7 @@ session_start();
                         <li><a href="food.php">FOOD</a></li>
                         <?php
 
+                        // Check if the 'user_data' and 'role' are set in the session
                         if (isset($_SESSION['user_data']) && isset($_SESSION['role'])) {
                             // Check the role value
                             if ($_SESSION['role'] == 2) {
@@ -38,6 +39,7 @@ session_start();
                                 echo '<li><a href="transaksi.php">Barang Anda</a></li>';
                             } elseif ($_SESSION['role'] == 1) {
                                 echo '<li><a href="daftarproduk.php">Tambah Produk</a></li>';
+                                echo '<li><a href="user_admin.php">User</a></li>';
                             }
                         } else {
                             // Handle the case when the 'user_data' or 'role' is not set (optional)

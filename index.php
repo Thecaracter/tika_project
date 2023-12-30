@@ -80,6 +80,7 @@ session_start();
                                 echo '<li><a href="transaksi.php">Barang Anda</a></li>';
                             } elseif ($_SESSION['role'] == 1) {
                                 echo '<li><a href="daftarproduk.php">Tambah Produk</a></li>';
+                                echo '<li><a href="user_admin.php">User</a></li>';
                             }
                         } else {
                             // Handle the case when the 'user_data' or 'role' is not set (optional)

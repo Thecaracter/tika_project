@@ -39,6 +39,7 @@ include 'koneksi.php';
                                 echo '<li><a href="transaksi.php">Barang Anda</a></li>';
                             } elseif ($_SESSION['role'] == 1) {
                                 echo '<li><a href="daftarproduk.php">Tambah Produk</a></li>';
+                                echo '<li><a href="user_admin.php">User</a></li>';
                             }
                         } else {
                             // Handle the case when the 'user_data' or 'role' is not set (optional)
@@ -154,7 +155,7 @@ include 'koneksi.php';
                             echo '<td>' . $row['alamat'] . '</td>';
                             echo '<td>' . $row['total_bayar'] . '</td>';
                             echo '<td>';
-                            echo ' <button class="delete-btn" onclick="deleteProduct(\'' . $row['order_id'] . '\')">Batalkan Pesanan</button>';
+                            echo '<button class="delete-btn" onclick="deleteProduct(\'' . $row['order_id'] . '\')" style="background-color: #dc3545; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Batalkan Pesanan</button>';
                             echo '</td>';
                             echo '</tr>';
                         }
