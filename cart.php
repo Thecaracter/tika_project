@@ -10,7 +10,16 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="images/kucing.png" type="image/png" rel="shortcut icon" />
     <link rel="stylesheet" href="style.css">
+    <!-- jQuery -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
+
+
+
     <title> HAY MIAW CARE SHOP.com </title>
 </head>
 
@@ -161,8 +170,12 @@ session_start();
 
             <!-- Use $orderID value in HTML -->
             <label for="order_id">Order ID</label>
-            <input id="order_id" type="text" name="order_id" value="<?php echo htmlspecialchars($orderID); ?>" readonly>
-            <select id="kategori_produk" name="kategori_produk" required>
+            <input id="order_id" type="text" name="order_id" value="<?php echo htmlspecialchars($orderID); ?>" readonly
+                required>
+
+            <label for="kategori_produk">Produk</label>
+            <select id="kategori_produk" name="kategori_produk" required
+                style="width: 100%; height: 50px; padding: 10px; font-size: 16px; border-radius: 5px; overflow: auto;">
                 <option value="0">- Pilih Product -</option>
                 <?php
                 // Assuming you have a database connection established in your koneksi.php file
@@ -187,23 +200,34 @@ session_start();
                 ?>
             </select>
 
+            <!-- Script to initialize Select2 -->
+            <script>
+                // Initialize Select2 after the document is fully loaded
+                $(document).ready(function () {
+                    $('#kategori_produk').select2({
+                        placeholder: "Select an option",
+                        allowClear: true
+                    });
+                });
+            </script>
+
             <label for="harga">Harga Produk:</label>
-            <input type="text" id="harga" name="harga" readonly>
+            <input type="text" id="harga" name="harga" readonly required>
+
             <label for="alamat_pengiriman">Alamat Pengiriman</label>
-            <input id="alamat_pengiriman" type="text" name="alamat_pengiriman" placeholder="Alamat Pengiriman">
+            <input id="alamat_pengiriman" type="text" name="alamat_pengiriman" placeholder="Alamat Pengiriman" required>
 
             <label for="jumlah">Jumlah (Max: 10)</label>
-            <input id="jumlah" type="number" name="jumlah" placeholder="Jumlah" max="10">
+            <input id="jumlah" type="number" name="jumlah" placeholder="Jumlah" max="10" required>
 
             <label for="total_pembayaran">Total Pembayaran:</label>
-            <input type="text" id="total_pembayaran" name="total_pembayaran" readonly>
+            <input type="text" id="total_pembayaran" name="total_pembayaran" readonly required>
 
             <button id="tambah_produk" type="button" class="btn-primary" onclick="addProduct()">Tambah Produk</button>
             <button id="kirim" type="button" class="btn-primary" onclick="submitOrder()">Pesan Sekarang</button>
         </form>
-
         <!-- Table to display orders -->
-        <table id="order-table">
+        <table id="order-table" class="table">
             <thead>
                 <tr>
                     <th>Produk</th>
@@ -227,6 +251,7 @@ session_start();
 
     <!-- JavaScript to update the price based on the selected product -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <script>
         function addProduct() {
             var selectedOption = $('#kategori_produk').find('option:selected');
@@ -235,7 +260,12 @@ session_start();
             var harga = selectedOption.data('harga');
             var jumlah = $('#jumlah').val();
             var alamat = $('#alamat_pengiriman').val();
-            var total = harga * jumlah;
+
+            // Validasi input
+            if (productId === "0" || jumlah === "" || alamat === "") {
+                alert("Harap lengkapi semua kolom yang diperlukan.");
+                return;
+            }
 
             // Add the selected product to the table
             $('#order-table tbody').append('<tr>' +
@@ -243,7 +273,7 @@ session_start();
                 '<td class="jumlah">' + jumlah + '</td>' +
                 '<td>' + alamat + '</td>' +
                 '<td class="harga">' + harga + '</td>' +
-                '<td class="total">' + total + '</td>' +
+                '<td class="total">' + (harga * jumlah) + '</td>' +
                 '</tr>');
 
             // Update the total pembayaran

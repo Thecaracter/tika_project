@@ -197,9 +197,9 @@ include 'koneksi.php';
                             echo '<td>' . $row['harga'] . '</td>';
                             echo '<td>' . $row['name_kategori'] . '</td>';
                             echo '<td>';
-                            echo '<a href="updateproduk.php?' . http_build_query($row) . '"><button class="update-btn">Update</button></a>';
+                            echo '<a href="updateproduk.php?' . http_build_query($row) . '"><button class="update-btn" style="padding: 8px 16px; background-color: #007BFF; color: #fff; border: none; border-radius: 4px;">Update</button></a>';
                             echo '<span class="button-spacing"></span>'; // Add spacing between buttons
-                            echo '<button class="delete-btn" onclick="deleteProduct(' . $row['produk_id'] . ')">Delete</button>';
+                            echo '<button class="delete-btn" onclick="deleteProduct(' . $row['produk_id'] . ')" style="padding: 8px 16px; background-color: #DC3545; color: #fff; border: none; border-radius: 4px;">Delete</button>';
                             echo '</td>';
                             echo '</tr>';
                         }
