@@ -11,6 +11,8 @@ include 'koneksi.php';
     <link href="images/kucing.png" type="image/png" rel="shortcut icon" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     </link>
     <title> HAY MIAW CARE SHOP.com </title>
 </head>
@@ -158,13 +160,22 @@ include 'koneksi.php';
 
                 <button id="kirim" type="submit" class="btn-primary">Pesan Sekarang</button>
             </form>
+            <br>
+            <div style="position: relative; display: flex; align-items: center;">
+                <input type="search" class="search" name="search"
+                    style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-size: 16px; width: 200px; flex: 1;">
+
+                <span style="margin-left: 10px;">
+                    <i style="color: #aaa; font-size: 20px; cursor: pointer;" class="fa fa-search"></i>
+                </span>
+            </div>
+
             <?php
-
-
             // Perform a query to fetch product data from the database
             $query = "SELECT produk.*, kategori.name AS name_kategori FROM produk JOIN kategori ON produk.kategori_id = kategori.kategori_id;";
             $result = mysqli_query($conn, $query);
             ?>
+
             <table id="order-table">
                 <thead>
                     <tr>
@@ -178,10 +189,6 @@ include 'koneksi.php';
                 <tbody>
                     <?php
                     if ($result) {
-                        // Open the tbody tag
-                        echo '
-                <tbody>';
-
                         // Fetch associative array
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<tr>';
@@ -196,8 +203,6 @@ include 'koneksi.php';
                             echo '</td>';
                             echo '</tr>';
                         }
-                        // Close the tbody tag
-                        echo '</tbody>';
 
                         // Free result set
                         mysqli_free_result($result);
@@ -207,94 +212,150 @@ include 'koneksi.php';
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr id="no-data-message" style="display: none; text-align: center;">
+                        <td colspan="5">Tidak ada data</td>
+                    </tr>
+                </tfoot>
             </table>
-        </div>
-    </div>
-    <script src="JS/cart.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const icon = document.querySelector(".icon");
-            const menu = document.querySelector(".meni");
 
-            // Toggle menu visibility when the icon is clicked
-            icon.addEventListener("click", function () {
-                menu.style.display = menu.style.display === "none" ? "block" : "none";
-            });
-        });
-    </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var searchInput = document.querySelector('.search');
+                    var tableBody = document.querySelector('#order-table tbody');
+                    var noDataMessage = document.querySelector('#no-data-message');
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    searchInput.addEventListener('input', function () {
+                        var value = this.value.toLowerCase();
+                        var rows = document.querySelectorAll('#order-table tbody tr');
 
-    <script>
-        function deleteProduct(productId) {
-            // Show a SweetAlert confirmation dialog
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You won\'t be able to revert this!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // User confirmed, proceed with the deletion
+                        var hasMatchingData = false;
 
-                    // Make an AJAX request to the server-side script
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "controller/deleteproduk_controller.php", true);
-                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        rows.forEach(function (row) {
+                            var rowData = row.textContent.toLowerCase();
+                            var isMatch = rowData.indexOf(value) > -1;
+                            row.style.display = isMatch ? '' : 'none';
 
-                    // Send the productId as data
-                    xhr.send("productId=" + productId);
-
-                    // Callback function when the request is completed
-                    xhr.onload = function () {
-                        if (xhr.status == 200) {
-                            // Parse the JSON response
-                            var response = JSON.parse(xhr.responseText);
-
-                            // Check the status and show SweetAlert accordingly
-                            if (response.status === 'success') {
-                                Swal.fire({
-                                    title: 'Deleted!',
-                                    text: response.message,
-                                    icon: 'success'
-                                }).then(() => {
-                                    // Reload the page after a short delay
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 1000); // 1000 milliseconds = 1 second
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: response.message,
-                                    icon: 'error'
-                                });
+                            if (isMatch) {
+                                hasMatchingData = true;
                             }
-                        } else {
-                            console.error("Delete request failed with status", xhr.status);
+                        });
 
-                            // Show SweetAlert for deletion failure
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Failed to delete the product.',
-                                icon: 'error'
-                            });
+                        // Show/hide "Tidak ada data" message in the footer
+                        noDataMessage.style.display = hasMatchingData ? 'none' : 'table-row';
+                    });
+                });
+            </script>
+            <script src="JS/cart.js"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const icon = document.querySelector(".icon");
+                    const menu = document.querySelector(".meni");
+
+                    // Toggle menu visibility when the icon is clicked
+                    icon.addEventListener("click", function () {
+                        menu.style.display = menu.style.display === "none" ? "block" : "none";
+                    });
+                });
+            </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+            <script>
+                function deleteProduct(productId) {
+                    // Show a SweetAlert confirmation dialog
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You won\'t be able to revert this!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // User confirmed, proceed with the deletion
+
+                            // Make an AJAX request to the server-side script
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "controller/deleteproduk_controller.php", true);
+                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                            // Send the productId as data
+                            xhr.send("productId=" + productId);
+
+                            // Callback function when the request is completed
+                            xhr.onload = function () {
+                                console.log(xhr.responseText); // Lihat respons di console
+
+                                if (xhr.status == 200) {
+                                    // Parse the JSON response
+                                    var response = JSON.parse(xhr.responseText);
+
+                                    // Check the status and show SweetAlert accordingly
+                                    if (response.status === 'success') {
+                                        Swal.fire({
+                                            title: 'Deleted!',
+                                            text: response.message,
+                                            icon: 'success'
+                                        }).then(() => {
+                                            // Reload the page after a short delay
+                                            setTimeout(() => {
+                                                location.reload();
+                                            }, 1000); // 1000 milliseconds = 1 second
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: response.message,
+                                            icon: 'error'
+                                        });
+                                    }
+                                } else {
+                                    console.error("Delete request failed with status", xhr.status);
+
+                                    // Show SweetAlert for deletion failure
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Failed to delete the product.',
+                                        icon: 'error'
+                                    });
+                                }
+                            };
                         }
-                    };
+                    });
                 }
-            });
-        }
-    </script>
-    <style>
-        .button-spacing {
-            margin-right: 10px;
-            /* Adjust the margin as needed */
-        }
-    </style>
+            </script>
+            <style>
+                .button-spacing {
+                    margin-right: 10px;
+                    /* Adjust the margin as needed */
+                }
+            </style>
+            <style>
+                #no-data-message {
+                    background-color: #004085;
+                    /* Ganti dengan warna biru tua yang diinginkan */
+                    color: #fff;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-weight: bold;
+                    display: none;
+                    animation: fadeOut 1s ease-out;
+                }
+
+                @keyframes fadeOut {
+                    from {
+                        opacity: 1;
+                    }
+
+                    to {
+                        opacity: 0;
+                    }
+                }
+            </style>
+
 
 
 </body>
