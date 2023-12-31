@@ -124,6 +124,11 @@ include 'koneksi.php';
         <div class="pemesanan-produk">
             <center>
                 <h1>Data Transaksi</h1>
+                <br>
+                <label for="searchInput" style="margin-bottom: 10px;">Search: </label>
+                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by Order Id"
+                    style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+
             </center>
             <?php
 
@@ -180,6 +185,28 @@ include 'koneksi.php';
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("order-table");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // Change the index to match the column you want to search
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
     <script>
         function completeOrder(orderId) {
             // Menggunakan library SweetAlert (Swal)
