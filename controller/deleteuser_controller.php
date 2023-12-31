@@ -8,50 +8,35 @@ $response = array();
 if (isset($_POST['customerId'])) {
     $customerId = $_POST['customerId'];
 
-    // Use prepared statement to perform the deletion in the order table
-    $deleteOrderQuery = "DELETE FROM `order` WHERE customerId = ?";
+    // Use prepared statement to perform the deletion in the database
+    $deleteQuery = "DELETE FROM customer WHERE customerid = ?";
 
-    $stmtOrder = mysqli_prepare($conn, $deleteOrderQuery);
+    $stmt = mysqli_prepare($conn, $deleteQuery);
 
-    if ($stmtOrder) {
-        mysqli_stmt_bind_param($stmtOrder, "i", $customerId);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $customerId);
 
-        if (mysqli_stmt_execute($stmtOrder)) {
-            // Deletion from order table successful
-            // Now, delete from customer table
-            $deleteCustomerQuery = "DELETE FROM customer WHERE customerId = ?";
-            $stmtCustomer = mysqli_prepare($conn, $deleteCustomerQuery);
-
-            if ($stmtCustomer) {
-                mysqli_stmt_bind_param($stmtCustomer, "i", $customerId);
-
-                if (mysqli_stmt_execute($stmtCustomer)) {
-                    // Deletion from customer table successful
-                    $response['status'] = 'success';
-                    $response['message'] = 'Orders and customer deleted successfully';
-                } else {
-                    // Deletion from customer table failed
-                    $response['status'] = 'error';
-                    $response['message'] = 'Error deleting customer: ' . mysqli_stmt_error($stmtCustomer);
-                }
-
-                mysqli_stmt_close($stmtCustomer);
-            } else {
-                // Error in prepared statement for customer deletion
-                $response['status'] = 'error';
-                $response['message'] = 'Error in prepared statement for customer deletion: ' . mysqli_error($conn);
-            }
+        if (mysqli_stmt_execute($stmt)) {
+            // Deletion successful
+            $response['status'] = 'success';
+            $response['message'] = 'Customer deleted successfully';
         } else {
-            // Deletion from order table failed
+            // Deletion failed
             $response['status'] = 'error';
-            $response['message'] = 'Error deleting orders: ' . mysqli_stmt_error($stmtOrder);
+            $response['message'] = 'Error: ' . mysqli_stmt_error($stmt);
+
+            // Tambahan: Menambah informasi kesalahan ke dalam log
+            error_log('Error deleting customer: ' . mysqli_stmt_error($stmt));
         }
 
-        mysqli_stmt_close($stmtOrder);
+        mysqli_stmt_close($stmt);
     } else {
-        // Error in prepared statement for order deletion
+        // Error in prepared statement
         $response['status'] = 'error';
-        $response['message'] = 'Error in prepared statement for order deletion: ' . mysqli_error($conn);
+        $response['message'] = 'Error in prepared statement: ' . mysqli_error($conn);
+
+        // Tambahan: Menambah informasi kesalahan ke dalam log
+        error_log('Error in prepared statement: ' . mysqli_error($conn));
     }
 } else {
     // Invalid request
