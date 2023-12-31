@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include 'koneksi.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="images/kucing.png" type="image/png" rel="shortcut icon" />
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-heBDorEHM2augMRz"></script>
     <title> HAY MIAW CARE SHOP.com </title>
 </head>
 
@@ -51,9 +53,8 @@ session_start();
                     </ul>
                 </li>
 
-
                 <li class="submenu">
-                    <a>Service</a>
+                    <a href="miaw.html">Service</a>
                     <ul class="submenu-content">
                         <li><a href="hotel.php">HOTEL</a></li>
                         <li><a href="miawcare.php">CARE</a></li>
@@ -116,37 +117,108 @@ session_start();
 
             </ul>
         </div>
-        <div class="description">
-            <h2>MAU PERGI MUDIK ATAU LIBURAN TAPI ANABUL GAK ADA YANG RAWAT ?</h2>
-            <p>
-                Ketika pergi liburan atau mudik baik ke luar negeri maupun ke luar kota dalam waktu yang lama,
-                memangtidak mungkin bagi kita untuk membawa Anabul kesayangan turut serta.
-                Takutnya nih, bisa stres kalau kelamaan di jalan..Nah, di sisi lain meninggalkan
-                mereka di rumah sendiri juga tidak membuat kita lebih tenang.
-                Meski dititipkan kepada tetangga atau teman, belum tentu, kan,
-                perawatan yang diberikan sesuai dengan standar pemiliknya.
-                Oleh karena itu, pilihan terbaik supaya peliharaan kita tetap senang adalah
-                menitipkannya di penitipan hewan, pet shop, maupun pet hotel !
-            </p>
-            <p>
-                <center>
-                    <h1> Yuk <span> Titipkan Anabul Kamu Di</h1>
-                    <h1> MIAW HOTEL BY HAY MIAW CARE SHOP</h1>
-            </p>
+        <div class="logoone">
+            <img src="images/miaw3.png" width="310" height="300" loading="lazy" alt="" class="img">
         </div>
 
-        <div class="background_imageone">
-            <div class="boking">
-                <h1>BOOKING NOW!!</h1>
-                <a href="https://api.whatsapp.com/">
-                    <div class="button">
-                        <p>BOOKING NOW !!!!?</p>
-                    </div>
-                </a>
-            </div>
+        <div class="pemesanan-produk">
+            <center>
+                <h1>Data Transaksi</h1>
+            </center>
+            <?php
+
+
+            $query = "SELECT * FROM `order` WHERE status = '2' ORDER BY orderdate ASC;";
+
+            $result = mysqli_query($conn, $query);
+            ?>
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Order Date</th>
+                        <th>Customer Id</th>
+                        <th>Alamat</th>
+                        <th>Total Bayar</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result) {
+                        // Open the tbody tag
+                        echo '<tbody>';
+
+                        // Fetch associative array
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<tr>';
+                            echo '<td>' . $row['order_id'] . '</td>';
+                            echo '<td>' . $row['orderdate'] . '</td>';
+                            echo '<td>' . $row['customerid'] . '</td>';
+                            echo '<td>' . $row['alamat'] . '</td>';
+                            echo '<td>' . $row['total_bayar'] . '</td>';
+                            $status = $row['status'];
+                            echo '<td>';
+                            echo '<button class="payment-btn" onclick="completeOrder(\'' . $row['order_id'] . '\')" style="background-color: #28a745; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Selesaikan Pesanan</button>';
+                            echo '</td>';
+                            echo '</tr>';
+                        }
+                        // Close the tbody tag
+                        echo '</tbody>';
+
+                        // Free result set
+                        mysqli_free_result($result);
+                    } else {
+                        // Handle the error if the query fails
+                        echo "Error: " . mysqli_error($conn);
+                    }
+                    ?>
+
+                </tbody>
+            </table>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function completeOrder(orderId) {
+            // Menggunakan library SweetAlert (Swal)
+            Swal.fire({
+                title: 'Konfirmasi Selesaikan Pesanan',
+                text: 'Anda yakin ingin menyelesaikan pesanan ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Selesaikan!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Ajax request untuk mengirim order_id ke server dan menyelesaikan pesanan
+                    fetch('controller/updatestatusselesai_controller.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'order_id=' + orderId
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                // Sukses menyelesaikan pesanan, tampilkan pesan sukses
+                                Swal.fire('Sukses!', data.message, 'success');
+                                // Refresh halaman setelah menyelesaikan pesanan (opsional)
+                                location.reload();
+                            } else {
+                                // Gagal menyelesaikan pesanan, tampilkan pesan kesalahan
+                                Swal.fire('Error!', data.message, 'error');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

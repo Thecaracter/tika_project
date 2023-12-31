@@ -41,6 +41,7 @@ include 'koneksi.php';
                                 echo '<li><a href="transaksi.php">Barang Anda</a></li>';
                             } elseif ($_SESSION['role'] == 1) {
                                 echo '<li><a href="daftarproduk.php">Tambah Produk</a></li>';
+                                echo '<li><a href="transaksi_admin.php">Transaksi User</a></li>';
                                 echo '<li><a href="user_admin.php">User</a></li>';
                             }
                         } else {
@@ -161,11 +162,15 @@ include 'koneksi.php';
 
                             if ($status == 1) {
                                 echo '<td>';
-                                echo '<button class="payment-btn" onclick="paymentAction(\'' . $row['order_id'] . '\')" style="background-color: #28a745; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Lakukan Pembayaran</button>';
+                                echo '<button class="payment-btn" onclick="paymentAction(\'' . $row['order_id'] . '\')" style="background-color: #3887BE; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Lakukan Pembayaran</button>';
                                 echo '</td>';
                             } elseif ($status == 2) {
                                 echo '<td>';
                                 echo '<button class="delete-btn" onclick="deleteProduct(\'' . $row['order_id'] . '\')" style="background-color: #dc3545; color: #fff; padding: 8px 8px; border: none; border-radius: 4px; cursor: pointer;">Batalkan Pesanan</button>';
+                                echo '</td>';
+                            } elseif ($status == 3) {
+                                echo '<td>';
+                                echo '<span style="border: 1px solid #28a745; color: #28a745; padding: 6px 10px; border-radius: 30px; display: inline-block;">Pesanan Selesai</span>';
                                 echo '</td>';
                             } else {
                                 echo '<td>Status Tidak Dikenali</td>';

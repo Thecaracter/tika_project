@@ -78,6 +78,7 @@ session_start();
                                 echo '<li><a href="transaksi.php">Barang Anda</a></li>';
                             } elseif ($_SESSION['role'] == 1) {
                                 echo '<li><a href="daftarproduk.php">Tambah Produk</a></li>';
+                                echo '<li><a href="transaksi_admin.php">Transaksi User</a></li>';
                                 echo '<li><a href="user_admin.php">User</a></li>';
                             }
                         } else {
@@ -85,7 +86,6 @@ session_start();
                         }
                         ?>
                         <li><a href="cleaning.html">CLEANING TOOL</a></li>
-                        <li><a href="medis.html">MEDICINE</a></li>
                         <li><a href="medis.html">MEDICINE</a></li>
                     </ul>
                 </li>
