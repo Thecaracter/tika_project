@@ -28,7 +28,7 @@ if (isset($_POST['order_id'])) {
         // Buat parameter untuk Midtrans Snap menggunakan data dari database
         $params = array(
             'transaction_details' => array(
-                'order_id' => 'rrrrrrr' . $orderData['order_id'],
+                'order_id' => 'miaw' . $orderData['order_id'],
                 'gross_amount' => $orderData['total_bayar'],
             ),
             'customer_details' => array(
