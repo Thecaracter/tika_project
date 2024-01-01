@@ -2,7 +2,7 @@
 include '../koneksi.php';
 require_once __DIR__ . '/../midtrans-php-master/Midtrans.php';
 
-\Midtrans\Config::$serverKey = 'SB-Mid-server-EWTESVSugiMf40WD5n-U9sZV';
+\Midtrans\Config::$serverKey = 'SB-Mid-server-4KL91wOs0o1dr7tkKAhATv6v';
 \Midtrans\Config::$isProduction = false;
 \Midtrans\Config::$isSanitized = true;
 \Midtrans\Config::$is3ds = true;

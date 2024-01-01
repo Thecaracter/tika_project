@@ -11,7 +11,7 @@ include 'koneksi.php';
     <link href="images/kucing.png" type="image/png" rel="shortcut icon" />
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="SB-Mid-client-heBDorEHM2augMRz"></script>
+        data-client-key="SB-Mid-client-H0REoJNtl06FQJuJ"></script>
     <title> HAY MIAW CARE SHOP.com </title>
 </head>
 
